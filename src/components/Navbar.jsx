@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { Menu, X } from "lucide-react"
+import { profile } from "../data/profile"
 
 const navLinks = [
   { label: "Home", href: "#hero" },
@@ -56,7 +57,7 @@ export default function Navbar() {
             }}
             className="text-white font-bold text-lg tracking-tight"
           >
-            Alex Morgan
+            {profile.name}
           </a>
 
           <div className="hidden md:flex items-center gap-8">
