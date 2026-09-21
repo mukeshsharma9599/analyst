@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell, AreaChart, Area } from "recharts"
 import { dashboardItems } from "../data/dashboards"
+import Tilt from "./Tilt"
+import Reveal from "./Reveal"
 
 const salesData = [
   { name: "Jan", revenue: 142, target: 130 },
@@ -178,6 +180,7 @@ export default function DashboardGallery() {
   return (
     <section id="dashboards" className="section-padding bg-neutral-950">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
+        <Reveal>
         <div className="mb-16 md:mb-24">
           <span className="section-label">Dashboards</span>
           <h2 className="editorial-heading text-white mb-6">
@@ -188,12 +191,17 @@ export default function DashboardGallery() {
             decisions.
           </h2>
         </div>
+        </Reveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {dashboardItems.map((item) => (
-            <DashboardShell key={item.id} title={item.title} subtitle={`${item.type} Demo Dashboard`}>
+          {dashboardItems.map((item, i) => (
+            <Reveal key={item.id} delay={i * 120}>
+            <Tilt max={7} className="h-full">
+            <DashboardShell title={item.title} subtitle={`${item.type} Demo Dashboard`}>
               <DashboardPreview type={item.type} />
             </DashboardShell>
+            </Tilt>
+            </Reveal>
           ))}
         </div>
       </div>

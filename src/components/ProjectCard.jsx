@@ -1,24 +1,29 @@
 import { useState } from "react"
 import { ArrowRight } from "lucide-react"
 import MiniDashboard from "./MiniDashboard"
+import Tilt from "./Tilt"
+import Reveal from "./Reveal"
 
 export default function ProjectCard({ project }) {
   const [hovered, setHovered] = useState(false)
   const isEven = project.id % 2 === 0
 
   return (
-    <div
+    <Reveal>
+    <Tilt
+      max={5}
       className="relative overflow-hidden rounded-2xl bg-neutral-900 border border-white/5 group"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       style={{
-        transform: hovered ? "translateY(-4px)" : "translateY(0)",
-        transition: "transform 0.4s ease",
         boxShadow: hovered
-          ? "0 20px 40px rgba(0,0,0,0.3)"
+          ? "0 30px 70px rgba(0,0,0,0.45), 0 0 40px rgba(6,182,212,0.08)"
           : "0 0 0 rgba(0,0,0,0)",
+        transition: "box-shadow 0.4s ease",
       }}
     >
+      <div
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
       <div
         className={`flex flex-col ${
           isEven ? "lg:flex-row" : "lg:flex-row-reverse"
@@ -93,6 +98,8 @@ export default function ProjectCard({ project }) {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </Tilt>
+    </Reveal>
   )
 }
